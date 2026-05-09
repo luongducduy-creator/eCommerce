@@ -6,7 +6,7 @@ const server = app.listen( 3055 , () => {
     console.log(`WSV eCommerce start with ${PORT}`)
 })
 
-// process.on('SIGINT',() => {
-//  server.close(() => console.log('Exit Server Express'))
-// //  Notifi.send( ping...)
-// })
+process.on('SIGINT',() => {
+ server.close(() => console.log('Exit Server Express'))
+//  Notifi.send( ping...)
+})
