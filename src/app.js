@@ -1,8 +1,11 @@
+
+require('dotenv').config()
 const express = require('express')
 const app= express()
 const morgan = require('morgan')
 const helmet = require('helmet')
 const compression = require('compression')
+
 //init middlewares
 app.use(morgan("dev"))
 // morgan("dev")
@@ -14,14 +17,14 @@ app.use(helmet())
 app.use(compression())
 //init db
 require('./dbs/init.mongodb')
-const { checkOverload } = require('./helpers/check.connect')
-checkOverload()
+// const { checkOverload } = require('./helpers/check.connect')
+// checkOverload()
 //init router
 app.get('/',(req, res, next)=>{
-    const strCompress = 'hello Factipjs'
+    // const strCompress = 'hello Factipjs'
     return res.status(200).json({
         message: 'Welcome Fantipjs',
-        metadata: strCompress.repeat(10000)
+        // metadata: strCompress.repeat(10000)
     })
 })
 //handling error

@@ -6,7 +6,7 @@ const connectString = `mongodb://localhost:27017/shopDEV`
 mongoose.connect(connectString).then(_=>console.log(`connected Mongodb success`))
 .catch(err => console.log(`Error Connect!`, err))
 // dev
-if (1==1){
+if (1===1){
     mongoose.set('debug', true)
      mongoose.set('debug', {color: true})
 }
