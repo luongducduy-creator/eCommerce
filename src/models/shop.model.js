@@ -28,8 +28,8 @@ var shopSchema = new Schema({
         enum: ['active','inactive'],
         default: 'inactive'
     },
-    verfify: {
-        type: Schema.Types.boolean,
+    verify: {
+        type: Schema.Types.Boolean,
         default: false
     },
     roles:{
@@ -41,4 +41,4 @@ var shopSchema = new Schema({
 });
 
 //Export the model
-module.exports = mongoose.model('User', userSchema);
+module.exports = model(DOCUMENT_NAME, shopSchema);

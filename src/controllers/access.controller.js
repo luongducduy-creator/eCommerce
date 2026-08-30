@@ -3,6 +3,7 @@
 class AccessController{
 
     signUp = async (req, res, next)=>{
+          console.log(`[P]::signUp::`)
         try{
             console.log(`[P]::signUp::`,req.body)
             /*200 ok
