@@ -1,14 +1,18 @@
 'use strict'
 
-const {schema, model} = require('mongoose'); // Erase if already required
-const DOCUMENT_NAME = 'KeyToken'
-const COLLECTION_NAME = 'KeyTokens'
+const {Schema, model} = require('mongoose'); // Erase if already required
+const DOCUMENT_NAME = 'Key'
+const COLLECTION_NAME = 'Keys'
 // Declare the Schema of the Mongo model
 var keyTokenSchema = new Schema({
     user:{
-        type: Schema.Type.ObjectId,
+        type: Schema.Types.ObjectId,
         required: true,
         ref: 'Shop'
+    },
+    privateKey:{
+        type:String,
+        required:true,
     },
     publicKey:{
         type:String,
@@ -19,7 +23,7 @@ var keyTokenSchema = new Schema({
         default: []
     }
 },{
-    collection: collection_NAME,
+    collection: COLLECTION_NAME,
     timestamps: true
 });
 
