@@ -2,29 +2,24 @@
 
 
 const {model, Schema, Types} = require('mongoose'); // Erase if already required
-const DOCUMENT_NAME = 'apikey'
-const COLLECTION_NAME = 'apikey'
+const DOCUMENT_NAME = 'Apikey'
+const COLLECTION_NAME = 'Apikey'
 // Declare the Schema of the Mongo model
 var apiKeySchema = new Schema({
     key:{
         type:String,
         required:true,
-        unique:true,
+        unique:true
     },
-    status:{
-        type:boolean,
-        default:true,
+    status:{        
+        type: Boolean,
+        default:true
     },
     permissions:{
         type:String,
         required:true,
         enum:['0000','1111','2222']
-    },
-    createdAt:{
-        type:Date,
-        default:Date.now,
-        expires: '30d', // 30 days
-    },
+    }
 },{
     timestamps:true,
     collection: COLLECTION_NAME
