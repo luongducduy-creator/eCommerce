@@ -1,0 +1,36 @@
+$kind: http-request
+description: ""
+url: http://localhost:3056/v1/api/product
+method: POST
+headers:
+  x-api-key: 50b26ac836d035894aab9a0a9ba1d1cc4b1e6b49414221a58e32a7f90753f34075f776e1112e979e902249b449f0a08e312b343099e2041ee96ab95cf156d718
+  x-client-id: 6a969fc3afe2a87a90c63d2d
+  authorization: ""
+body:
+  type: json
+  content: "{\r
+
+    \  \"product_name\": \"Băng Quấn Bảo Vệ Khuỷu Tay Co Giãn Tốt Tiện Dụng Khi Chơi Thể Thao Cho Nam\",\r
+
+    \  \"product_thumb\": \"https://salt.tikicdn.com/cache/100x100/ts/product/d6/4f/c3/71f089390f605d172b54edf6aaa1877e.jpg.webp\",\r
+
+    \  \"product_description\": \"Áo thun nam MRM kiểu dáng Regular fit tôn dáng cơ thể, làm nổi bật form người mặc thêm nam tính, khỏe khoắn mà vẫn thoải mái vận động.\",\r
+
+    \  \"product_price\": 1234.000,\r
+
+    \  \"product_quantity\": 23,\r
+
+    \  \"product_type\": \"Clothing\",\r
+
+    \  \"product_attributes\": {\r
+
+    \    \"brand\": \"MRM VietNam China\",\r
+
+    \    \"size\": \"XL\",\r
+
+    \    \"material\": \"Thun\"\r
+
+    \  }\r
+
+    }"
+order: 4502909391724126

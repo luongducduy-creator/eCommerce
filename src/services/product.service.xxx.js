@@ -9,8 +9,11 @@ const {
     unPublishProductByShop,
     searchProductByUser,
     findAllProducts,
-    findProduct
-    } = require ('../models/repositories/product.repo')
+    findProduct,
+    updateProductById
+    } = require ('../models/repositories/product.repo');
+const { removeUndefinedObject, updateNestedObjectParser } = require('../utils');
+const { inserInventory } = require('../models/repositories/inventory.repo');
 
 //define Factory class to create product
 class ProductFactory{
@@ -33,11 +36,11 @@ class ProductFactory{
        
     }
 
-    static async updateProduct(type, payload){
+    static async updateProduct(type, productId, payload){
         const productClass= ProductFactory.productRegistry[type]
         if(!productClass) throw new BadRequestError (`Invalid Product Type ${type}`)
     
-        return new productClass( payload ).createProduct()
+        return new productClass( payload ).updateProduct(productId)
        
     }
 
@@ -109,7 +112,21 @@ class Product{
 
     //create new product
     async createProduct( product_id ){
-        return await product.create({...this, _id: product_id})
+        const newProduct = await product.create({...this, _id: product_id})
+        if(newProduct){
+            //add product_stock in inventory collection
+            await inserInventory({
+                productId: newProduct._id,
+                shopId: this.product_shop,
+                stock: this.product_quantity
+            })
+        }
+        return newProduct
+    }
+
+    //update Product
+     async updateProduct( productId, bodyUpdate ){
+        return await updateProductById({productId, bodyUpdate, model: product})
     }
 }
 
@@ -124,6 +141,29 @@ class Clothing extends Product{
         const newProduct = await super.createProduct()
         if(!newProduct) throw new BadRequestError('create new Product error')
         return newProduct;
+    }
+
+    async updateProduct( productId ){
+        /*
+            {
+                a:underfined
+                b:null
+            }
+        */
+       //1. remove attr has null and underfined
+    //    console.log (`[1]::`,this)
+       const objectParams = removeUndefinedObject (this)
+    //    console.log (`[2]::`,objectParams)
+       //2. check xem update o cho nao?
+       if(objectParams.product_attributes){
+            //update chill
+            await updateProductById({
+                productId,
+                bodyUpdate: updateNestedObjectParser(objectParams.product_attributes),
+                model: clothing})
+       }
+        const updateProduct = await super.updateProduct(productId, updateNestedObjectParser(objectParams))
+        return updateProduct
     }
 }
 
