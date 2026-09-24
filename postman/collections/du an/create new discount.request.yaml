@@ -1,0 +1,54 @@
+$kind: http-request
+description: ""
+url: http://localhost:3056/v1/api/discount
+method: GET
+headers:
+  x-api-key: 50b26ac836d035894aab9a0a9ba1d1cc4b1e6b49414221a58e32a7f90753f34075f776e1112e979e902249b449f0a08e312b343099e2041ee96ab95cf156d718
+  x-client-id: 6a969fc3afe2a87a90c63d2d
+  authorization: ""
+body:
+  type: json
+  content: "{\r
+
+    \  \"name\": \"name fixed amount\",\r
+
+    \  \"description\": \"description\",\r
+
+    \  \"type\": \"percentage\",\r
+
+    \  \"value\": 30000,\r
+
+    \  \"max_value\": 30000,\r
+
+    \  \"code\": \"SHOP-1122\",\r
+
+    \  \"start_date\": \"2023-04-25 09:00:00\",\r
+
+    \  \"end_date\": \"2023-04-28 09:00:00\",\r
+
+    \  \"max_uses\": 100,\r
+
+    \  \"uses_count\": 0,\r
+
+    \  \"users_used\": [],\r
+
+    \  \"max_uses_per_user\": 1,\r
+
+    \  \"min_order_value\": 200000,\r
+
+    \  \"created_by\": {},\r
+
+    \  \"is_active\": true,\r
+
+    \  \"applies_to\": \"specific\",\r
+
+    \  \"product_ids\": [\r
+
+    \    \"6a9a7bf96c4b2dc5f6742a87\",\r
+
+    \    \"6a9d48cbf5d9eb6e7abbadba\"\r
+
+    \  ]\r
+
+    }"
+order: 4503594769584901
