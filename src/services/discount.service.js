@@ -14,8 +14,8 @@ const{
     checkDiscountExist
 } = require('../models/repositories/discount.repo')
 
-const discount = require ('../models/discount.model');
-const { findAllDraftsForShop } = require('../models/repositories/product.repo');
+const discount = require('../models/discount.model');
+const { findAllDraftsForShop, findAllProducts } = require('../models/repositories/product.repo');
 const { model } = require('mongoose');
 /*
     Discount Services
@@ -85,7 +85,7 @@ class DiscountService{
      */
 
     static async getAllDiscountCodesWithProduct({
-        code, shopId, usersId, limmit, page
+        code, shopId, usersId, limit, page
     }){
         //create index for discount_code
         const foundDiscount = await discount.findOne({
@@ -109,7 +109,7 @@ class DiscountService{
                     product_shop: convertToObjectIdMongodb(shopId),
                     isPublished: true
                 },
-                limmit: +limmit,
+                limit: +limit,
                 page: +page,
                 sort: 'ctime',
                 select: ['product_name']
@@ -122,7 +122,7 @@ class DiscountService{
                     _id: {$in: discount_product_ids},
                     isPublished: true
                 },
-                limmit: +limmit,
+                limit: +limit,
                 page: +page,
                 sort: 'ctime',
                 select: ['product_name']
@@ -136,11 +136,11 @@ class DiscountService{
      */
 
     static async getAllDiscountCodesByShop({
-        limmit, page,
+        limit, page,
         shopId
     }){
         const discounts = await findAllDiscountCodesUnSelect({
-            limmit: +limmit,
+            limit: +limit,
             page: +page,
             filter:{
                 discount_shopId: convertToObjectIdMongodb(shopId),
@@ -166,7 +166,7 @@ class DiscountService{
 
         ]
      */
-    static async getAllDiscountAmount({ codeId, userId, shopId, products }){
+    static async getDiscountAmount({ codeId, userId, shopId, products }){
         const foundDiscount = await checkDiscountExist({
             model: discount,
             filter:{

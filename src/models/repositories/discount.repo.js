@@ -4,12 +4,12 @@ const {
 } = require('../../utils')
 
 const findAllDiscountCodesUnSelect = async({
-    limmit = 50, page = 1, sort = 'ctime',
+    limit = 50, page = 1, sort = 'ctime',
     filter, unSelect, model
 }) => {
     const skip = (page-1) * limit;
     const sortBy = sort === 'ctime' ? {_id:-1}:{_id:1}
-    const documents = await product.find( filter )
+    const documents = await model.find( filter )
     .sort(sortBy)
     .skip(skip)
     .limit(limit)
@@ -25,11 +25,11 @@ const findAllDiscountCodesSelect = async({
 }) => {
     const skip = (page-1) * limit;
     const sortBy = sort === 'ctime' ? {_id:-1}:{_id:1}
-    const documents = await product.find( filter )
+    const documents = await model.find( filter )
     .sort(sortBy)
     .skip(skip)
     .limit(limit)
-    .select(GetSelectData(Select))
+    .select(getSelectData(Select))
     .lean()
 
     return documents
