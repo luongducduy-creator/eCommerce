@@ -8,6 +8,7 @@ const {
     convertToObjectIdMongodb
 } = require('../utils')
 
+
 const{
     findAllDiscountCodesSelect,
     findAllDiscountCodesUnSelect,
@@ -16,7 +17,7 @@ const{
 
 const discount = require('../models/discount.model');
 const { findAllDraftsForShop, findAllProducts } = require('../models/repositories/product.repo');
-const { model } = require('mongoose');
+const { model, mongoose  } = require('mongoose');
 /*
     Discount Services
     1 - Generator Discount Code [Shop | Admin]
@@ -102,8 +103,12 @@ class DiscountService{
         }
         const { discount_applies_to, discount_product_ids } = foundDiscount
         let products
+        const discountProductIds = discount_product_ids.map(
+        id => new mongoose.Types.ObjectId(id)
+        );
         if (discount_applies_to === 'all'){
             //get all product
+            console.log(`all`)
             products = await findAllProducts({
                 filter:{
                     product_shop: convertToObjectIdMongodb(shopId),
@@ -117,17 +122,22 @@ class DiscountService{
         }
         if (discount_applies_to === 'specific'){
             //get the products ids
+            console.log('discount found:', foundDiscount)
+            console.log('discount id:', discount_product_ids)
+            console.log('discount limit:', limit)
+             console.log('discount page:', page)
              products = await findAllProducts({
                 filter:{
-                    _id: {$in: discount_product_ids},
+                    _id: { $in: discountProductIds },
                     isPublished: true
                 },
-                limit: +limit,
-                page: +page,
+                limit: limit,
+                page: page,
                 sort: 'ctime',
                 select: ['product_name']
             })
         }
+        console.log('products result:', products)
         return products
     }
 
