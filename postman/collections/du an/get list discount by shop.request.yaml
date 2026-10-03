@@ -1,0 +1,13 @@
+$kind: http-request
+description: ""
+url: http://localhost:3056/v1/api/discount?shopId=6a969fc3afe2a87a90c63d2d&limit=50&page=1
+method: GET
+headers:
+  x-api-key: 50b26ac836d035894aab9a0a9ba1d1cc4b1e6b49414221a58e32a7f90753f34075f776e1112e979e902249b449f0a08e312b343099e2041ee96ab95cf156d718
+  x-client-id: 6a969fc3afe2a87a90c63d2d
+  authorization: "{{json_web_token_0n72}}"
+queryParams:
+  shopId: 6a969fc3afe2a87a90c63d2d
+  limit: "50"
+  page: "1"
+order: 4503595644947704

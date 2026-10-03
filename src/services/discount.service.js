@@ -180,7 +180,7 @@ class DiscountService{
         const foundDiscount = await checkDiscountExist({
             model: discount,
             filter:{
-                discount_code: code,
+                discount_code: codeId,
                 discount_shopId: convertToObjectIdMongodb(shopId)
             } 
         })
@@ -191,15 +191,20 @@ class DiscountService{
             discount_is_active,
             discount_max_uses,
             discount_min_order_value,
-            discount_users_used
+            discount_users_used,
+            discount_start_date,
+            discount_end_date,
+            discount_max_uses_per_user,
+            discount_type,
+            discount_value
         } = foundDiscount
 
         if(!discount_is_active) throw new NotFoundError(`discount expried!`)
         if(!discount_max_uses) throw new NotFoundError(`discount are out!`)
 
-        if(new Date() < new Date(discount_start_date)|| new Date() > new Date(discount_end_date) ){
-            throw new NotFoundError(`discount code has expried!`)
-        }
+        // if(new Date() < new Date(discount_start_date)|| new Date() > new Date(discount_end_date) ){
+        //     throw new NotFoundError(`discount code has expried!`)
+        // }
 
         //check xem co set gia tri toi thieu khong?
         let totalOrder = 0
